@@ -8,12 +8,30 @@ UPLOAD_FOLDER = 'upload'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
+from flask import Flask, render_template, request
+import flask_restful
 
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from waitress import serve
+from werkzeug.utils import redirect
+
+from flask_restful import reqparse, abort, Api, Resource
 
 
 
 app = Flask(__name__)
+api = flask_restful.Api(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+
+
+
+@app.route('/')
+def main_window():
+    return render_template('object_manager.html')
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -42,5 +60,9 @@ def file_upload():
         return "Форма отправлена"
 
 
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
+    '''serve(app, host='0.0.0.0', port=5000)'''
+
