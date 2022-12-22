@@ -1,16 +1,41 @@
 import requests
 import random
-
-url = 'http://127.0.0.1:8080/file_upload'
-
-name_file = f'static/img/id{random.randrange(1,3)}.jpg'
-fp = open(name_file, 'rb')
-coord = f'55.484{random.randrange(1000)},46.964{random.randrange(1000)}'
+def new_rekord():
+    url = 'http://127.0.0.1:8080/file_upload'
 
 
-files = {'coord': coord,
-         'text': 'Приятно познакомиться', 'file': fp}
+    id = random.randrange(0, 12)
+    name_file = f'static/img/id{id}.jpg'
+    fp = open(name_file, 'rb')
+    coord = f'55.48{random.randrange(10000)},46.96{random.randrange(10000)}'
+    problem = {0:'Гололед на дорогах! Могут постродать дети!!!!',
+               1:'Сосульки на крышах нужно скорее убрать могут постродать люди.',
+               2: 'Упавшие деревья прегрождают дорогу. Уберите поскорей.',
+               3: 'Вандализм на стенах зданий. Портит внешний вид Вурнар!!!!',
+               4: 'Нет освещения на улицах. Видно не дальше своего носа.',
+               5: 'Заброшеные здания. Поселяются в них бомжи!',
+               6: 'Нет нормальных дорог!',
+               7: 'Старые здания. Могут рухнут ',
+               8: 'Поврежденые провода. Нет света.',
+               9: 'Дорога вся в ямах(Ехать  невозможно ).',
+               10: 'Яма на дороге уже второй год держится. Решите что нибудь. ',
+               11: 'Дорога вся в ямах(Ехать  невозможно ).',
+               12: 'Дерево упало прямо \nво дворе мешает проезжать .',
+               13: 'Дорога вся в ямах(Ехать  невозможно ).',
+               14: '',
+               15: '',
+               16: '',
+               17: '',
+               18: '',
+               19: ''
+               }
 
-resp = requests.post(url, files=files)
-fp.close()
-print(resp.text)
+    files = {'coord': coord,
+             'text': problem[id], 'file': fp}
+
+    resp = requests.post(url, files=files)
+    fp.close()
+    print(resp.text)
+
+for i in range(1):
+    new_rekord()
