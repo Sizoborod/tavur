@@ -1,10 +1,14 @@
 import requests
+import random
 
 url = 'http://127.0.0.1:8080/file_upload'
 
-fp = open('static/img/id1.jpg', 'rb')
+name_file = f'static/img/id{random.randrange(1,3)}.jpg'
+fp = open(name_file, 'rb')
+coord = f'55.484{random.randrange(1000)},46.964{random.randrange(1000)}'
 
-files = {'coord': '12.123456,45.568899',
+
+files = {'coord': coord,
          'text': 'Приятно познакомиться', 'file': fp}
 
 resp = requests.post(url, files=files)
