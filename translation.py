@@ -68,5 +68,30 @@ def update(name_file):
     print('запись успешно добавлена')
 
 def delete(name_file):
-    pass
+    with open('static/js/data.json', 'r', encoding="utf-8") as cat_file:
+        data_json = json.load(cat_file)['features']
+        # print(len(data_json))
+        del_index = False
+        # for i in data_json:
+            # print(i)
+        for i in range(len(data_json)):
+            # print(i,'  =====    ', data_json[i])
+            if name_file in data_json[i]['properties'].values():
+                del_index = i
+    if del_index:
+        del data_json[del_index]
+        ss = {"type": "FeatureCollection",
+              "features": []}
+        ss['features'].extend(data_json)
+
+        # print(ss)
+
+        with open('static/js/data.json', 'w', encoding="utf-8") as cat_file:
+            json.dump(ss, cat_file)
+        print('запись успешно удалена')
+    else:
+        print('запись не найдена')
+
+
+
 
