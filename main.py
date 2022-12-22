@@ -10,7 +10,7 @@ from werkzeug.utils import redirect
 
 from flask_restful import reqparse, abort, Api, Resource
 
-UPLOAD_FOLDER = 'upload'
+UPLOAD_FOLDER = 'static'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
@@ -51,11 +51,11 @@ def file_upload():
         f = request.files['file']
         my_date = dt.datetime.now()
         my_date = my_date.strftime("%Y-%m-%d_%H-%M-%S")
-        name = f"upload/{my_date}.txt"
+        name = f"static/txt/{my_date}.txt"
         d = open(name, mode="w", encoding='utf-8')
         print(f"{my_date}\n{coord[0]}\n{coord[1]}\n{text}", file=d)
         d.close()
-        name_img = f"{my_date}.jpg"
+        name_img = f"img/{my_date}.jpg"
         file = request.files['file']
         if file and allowed_file(file.filename):
             # filename = secure_filename(file.filename)
@@ -68,6 +68,6 @@ def file_upload():
 
 
 if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
-    '''serve(app, host='0.0.0.0', port=5000)'''
+    '''app.run(port=8080, host='127.0.0.1')'''
+    serve(app, host='0.0.0.0', port=5000)
 
