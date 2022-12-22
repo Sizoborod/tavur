@@ -1,15 +1,20 @@
-from flask import Flask, url_for, request, redirect
+from flask import Flask, url_for, request, redirect, render_template
 import datetime as dt
 from PIL import Image
 import os
 from werkzeug.utils import secure_filename
+import flask_restful
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from waitress import serve
+from werkzeug.utils import redirect
+
+from flask_restful import reqparse, abort, Api, Resource
 
 UPLOAD_FOLDER = 'upload'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
-from flask import Flask, render_template, request
-import flask_restful
+
 
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from waitress import serve
