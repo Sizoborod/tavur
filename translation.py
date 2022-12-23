@@ -36,10 +36,10 @@ def update(name_file):
     with open('static/js/data.json', 'r', encoding="utf-8") as cat_file:
         data_json = json.load(cat_file)['features']
         # print(data_json)
-        for i in data_json:
+        '''for i in data_json:
             if name_file in i['properties'].values():
                 print('объект уже добавлен')
-                return
+                return'''
     with open(f'static/txt/{name_file}.txt', 'r', encoding="utf-8") as txt_file:
         data_file = txt_file.readlines()
         data = data_file[0][:-1]
