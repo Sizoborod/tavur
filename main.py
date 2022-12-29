@@ -56,6 +56,19 @@ def file_upload():
         update(my_date)
         return "Форма отправлена"
 
+@app.route('/file', methods=['POST'])
+def file():
+    request.encoding = 'UTF-8'
+    if request.method == 'POST':
+        # print(request.form['{data'])
+        print('args', request.args)
+        print('form', request.form)
+        print('files', request.files)
+        print('data', request.data)
+        return "Форма отправлена"
+
+    return "Форма отправлена"
+
 
 @app.route('/delete/<namefile>')
 def greeting(namefile):
